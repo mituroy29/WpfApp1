@@ -1,0 +1,148 @@
+﻿<Page x:Class="WpfApp1.StudentMarkDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      xmlns:loc3="clr-namespace:ViewModelLayer;assembly=ViewModelLayer"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="950"
+      Title="StudentMarkDetailsPage" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <loc3:StudentResultDetails x:Key="studMrks"></loc3:StudentResultDetails>
+    </Page.Resources>
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".001*"></ColumnDefinition>
+            <ColumnDefinition Width="1.7*"></ColumnDefinition>
+            <ColumnDefinition Width="4.2*"></ColumnDefinition>
+            <ColumnDefinition Width=".001*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height=".001*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontSize="21" Foreground="Black" HorizontalAlignment="Center">Manage Stdent's Mark Details</Label>
+        <Border Grid.Column="2" Grid.Row="1" Background="Transparent">
+            <Grid Background="#00b3b3">
+                <StackPanel>
+                    <!--<Grid Height="50" Background="#00b3b3">-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="AddStudMark" Background="Beige" Height="25" Width="85" Margin="10" Click="AddStudMark_Click">Add</Button>
+                            <Button x:Name="UpdtStudMark" Background="Beige" Height="25" Width="85" Margin="10" Click="UpdtStudMark_Click">Update</Button>
+                            <Button x:Name="DelStudMark" Background="Beige" Height="25" Width="85" Margin="10" Click="DelStudMark_Click">Delete</Button>
+                            <!--<Button x:Name="ExportStudMark" Background="Beige" Height="25" Width="85" Margin="10" Click="ExportStudMark_Click">Export</Button>-->
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnExcel" Click="BtnExcel_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                                <Image Source="/Images/excel.png"></Image>
+                            </Button>
+                            <Button x:Name="btnXML" Click="BtnXML_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                                <Image Source="/Images/xml.png"></Image>
+                            </Button>
+                            <Button x:Name="btnCSV" Click="BtnCSV_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                                <Image Source="/Images/csv.png"></Image>
+                            </Button>
+                        </StackPanel>
+                    <!--</Grid>-->
+                    <DataGrid x:Name="grdStudentMark" AlternatingRowBackground="Beige" AutoGenerateColumns="False"
+                          CanUserAddRows="False" MouseDoubleClick="GrdStudentMark_MouseDoubleClick"
+                          Background="White" Height="379" BorderBrush="Gray" ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Exam Name" Binding="{Binding Path=ExamName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject1" Binding="{Binding Path=Subject1}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject2" Binding="{Binding Path=Subject2}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject3" Binding="{Binding Path=Subject3}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject4" Binding="{Binding Path=Subject4}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject5" Binding="{Binding Path=Subject5}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject6" Binding="{Binding Path=Subject6}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Subject7" Binding="{Binding Path=Subject7}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Exam Month" Binding="{Binding Path=ExamMonth}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Attendance" Binding="{Binding Path=Attendance}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness=".5" BorderBrush="Gray" Background="Transparent">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".1*"></ColumnDefinition>
+                    <ColumnDefinition Width="2.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width=".1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".15*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height=".15*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Grid.Column="1" Height="25" FontSize="12">* ID</Label>
+                <TextBox x:Name="studID" Grid.Row="1" Grid.Column="2" Height="25" Width="100"
+                              ToolTip="Enter student's id"></TextBox>
+                <Label Grid.Row="2" Grid.Column="1" Height="25" FontSize="12">* Student Name</Label>
+                <TextBox x:Name="studName" Grid.Row="2" Grid.Column="2" Height="25" Width="100"
+                                 MaxLength="12" ToolTip="Enter student's name"></TextBox>
+                <Label Grid.Row="3" Grid.Column="1" Height="25" FontSize="12">* Exam Name</Label>
+                <TextBox x:Name="studExmName" Grid.Row="3" Grid.Column="2" Height="25" Width="100"
+                                 MaxLength="12" ToolTip="Enter exam name"></TextBox>
+                <Label Grid.Row="4" Grid.Column="1" Height="25" FontSize="12">* Subject1</Label>
+                <TextBox x:Name="studSub1" Grid.Row="4" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject1 mark"></TextBox>
+                <Label Grid.Row="5" Grid.Column="1" Height="25" FontSize="12">* Subject2</Label>
+                <TextBox x:Name="studSub2" Grid.Row="5" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject2 mark"></TextBox>
+                <Label Grid.Row="6" Grid.Column="1" Height="25" FontSize="12">* Subject3</Label>
+                <TextBox x:Name="studSub3" Grid.Row="6" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject3 mark"></TextBox>
+                <Label Grid.Row="7" Grid.Column="1" Height="25" FontSize="12">* Subject4</Label>
+                <TextBox x:Name="studSub4" Grid.Row="7" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject4 mark"></TextBox>
+                <Label Grid.Row="8" Grid.Column="1" Height="25" FontSize="12">* Subject5</Label>
+                <TextBox x:Name="studSub5" Grid.Row="8" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject5 mark"></TextBox>
+                <Label Grid.Row="9" Grid.Column="1" Height="25" FontSize="12">* Subject6</Label>
+                <TextBox x:Name="studSub6" Grid.Row="9" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject6 mark"></TextBox>
+                <Label Grid.Row="10" Grid.Column="1" Height="25" FontSize="12">* Subject7</Label>
+                <TextBox x:Name="studSub7" Grid.Row="10" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter subject7 mark"></TextBox>
+                <Label Grid.Row="11" Grid.Column="1" Height="25" FontSize="12">* Exam Month</Label>
+                <TextBox x:Name="studExmMnth" Grid.Row="11" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter exam month"></TextBox>
+                <Label Grid.Row="12" Grid.Column="1" Height="25" FontSize="12">* Attendance (%)</Label>
+                <TextBox x:Name="studAtndnce" Grid.Row="12" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter student's attendance"></TextBox>
+            </Grid>
+        </Border>
+
+        <!--<StackPanel Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Background="Transparent">
+            <Border x:Name="minBrdr">
+                <Image x:Name="minImg" Source="/Images/minimize_box_blue1.png" Height="20" Width="20" MouseEnter="MinImg_MouseEnter"
+                   MouseLeave="MinImg_MouseLeave"  MouseLeftButtonDown="MinImg_MouseLeftButtonDown"></Image>
+            </Border>
+            <Border x:Name="clsBrdr">
+                <Image x:Name="clsImg" Source="/Images/close_box_red1.png" Height="20" Width="20" MouseEnter="ClsImg_MouseEnter"
+                       MouseLeave="ClsImg_MouseLeave"  MouseLeftButtonDown="ClsImg_MouseLeftButtonDown"></Image>
+            </Border>
+        </StackPanel>-->
+    </Grid>
+</Page>

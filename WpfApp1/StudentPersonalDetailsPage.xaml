@@ -1,0 +1,122 @@
+﻿<Page x:Class="WpfApp1.StudentPersonalDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+        xmlns:loc2="clr-namespace:ViewModelLayer;assembly=ViewModelLayer"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StudentPersonalDetailsPage" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <loc2:AddStudent x:Key="myCmd"></loc2:AddStudent>
+    </Page.Resources>
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".001*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width=".001*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height=".001*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<Image Source="/Images/LoginInage.jpg" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Stretch="Fill"></Image>-->
+        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FontSize="22" Foreground="Black" HorizontalAlignment="Center">Manage Student's Personal Details</Label>
+        <Border Grid.Column="2" Grid.Row="1" Background="Transparent">
+            <Grid>
+                <StackPanel>
+                    <Grid Height="78" Background="#00b3b3">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="AddStud" Background="Beige" Height="25" Width="85" Margin="10" Click="AddStud_Click">Add</Button>
+                                <Button x:Name="UpdtStud" Background="Beige" Height="25" Width="85" Margin="10" Click="UpdtStud_Click">Update</Button>
+                                <Button x:Name="DelStud" Background="Beige" Height="25" Width="85" Margin="10" Click="DelStud_Click">Delete</Button>
+                                <!--<Button x:Name="Export" Background="Beige" Height="25" Width="85" Margin="10" Click="Export_Click">Export</Button>-->
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="btnExcel" Click="BtnExcel_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                                    <Image Source="/Images/excel.png"></Image>
+                                </Button>
+                                <Button x:Name="btnXML" Click="BtnXML_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                                    <Image Source="/Images/xml.png"></Image>
+                                </Button>
+                                <Button x:Name="btnCSV" Click="BtnCSV_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                                    <Image Source="/Images/csv.png"></Image>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <DataGrid x:Name="grdStudent" AlternatingRowBackground="Beige" AutoGenerateColumns="False"
+                          CanUserAddRows="False" MouseDoubleClick="GrdStudent_MouseDoubleClick"
+                          Background="White" Height="359" BorderBrush="Gray" ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Department" Binding="{Binding Path=Department}"></DataGridTextColumn>
+                            <DataGridCheckBoxColumn Header="IsActive" Binding="{Binding Path=IsActive}"></DataGridCheckBoxColumn>
+                            <DataGridTextColumn Header="Address" Binding="{Binding Path=Address}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Contact Number" Binding="{Binding Path=ContactNumber}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness=".5" BorderBrush="Gray" Background="Transparent">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".1*"></ColumnDefinition>
+                    <ColumnDefinition Width="2.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width=".1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".25*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height=".25*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Grid.Column="1" Height="25" FontSize="12">* ID</Label>
+                <TextBox x:Name="studID" Grid.Row="1" Grid.Column="2" Height="25" Width="100"
+                              ToolTip="Enter student's id"></TextBox>
+                <Label Grid.Row="2" Grid.Column="1" Height="25" FontSize="12">* Name</Label>
+                <TextBox x:Name="studName" Grid.Row="2" Grid.Column="2" Height="25" Width="100"
+                                 MaxLength="12" ToolTip="Enter student's name"></TextBox>
+                <Label Grid.Row="3" Grid.Column="1" Height="25" FontSize="12">* Department</Label>
+                <TextBox x:Name="studDep" Grid.Row="3" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter student's department"></TextBox>
+                <Label Grid.Row="4" Grid.Column="1" Height="25" FontSize="12">IsActive</Label>
+                <CheckBox x:Name="studIsActv" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="21,20.667,47,10" Height="20"/>
+                <Label Grid.Row="5" Grid.Column="1" Height="25" FontSize="12">* Address</Label>
+                <TextBox x:Name="studAddrss" Grid.Row="5" Grid.Column="2" Height="25" Width="100"
+                                  ToolTip="Enter student's address"></TextBox>
+                <Label Grid.Row="6" Grid.Column="1" Height="25" FontSize="12">* Contact</Label>
+                <TextBox x:Name="studCntctNmbr" Grid.Row="6" Grid.Column="2" Height="25" Width="100"
+                                 ToolTip="Enter student's contact number"></TextBox>
+                <!--<Button Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" FontSize="12" Height="30" Width="80" x:Name="submit" Click="Submit_Click"
+                            Command="{Binding AddStudentCmnd,Source={StaticResource myCmd}}" VerticalAlignment="Bottom">Submit</Button>-->
+            </Grid>
+        </Border>
+
+        <!--<StackPanel Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Background="Transparent">
+            <Border x:Name="minBrdr">
+                <Image x:Name="minImg" Source="/Images/minimize_box_blue1.png" Height="20" Width="20" MouseEnter="MinImg_MouseEnter"
+                   MouseLeave="MinImg_MouseLeave"  MouseLeftButtonDown="MinImg_MouseLeftButtonDown"></Image>
+            </Border>
+            <Border x:Name="clsBrdr">
+                <Image x:Name="clsImg" Source="/Images/close_box_red1.png" Height="20" Width="20" MouseEnter="ClsImg_MouseEnter"
+                       MouseLeave="ClsImg_MouseLeave"  MouseLeftButtonDown="ClsImg_MouseLeftButtonDown"></Image>
+            </Border>
+        </StackPanel>-->
+    </Grid>
+</Page>

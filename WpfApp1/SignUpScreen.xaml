@@ -1,0 +1,159 @@
+﻿<Window x:Class="WpfApp1.SignUpScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:loc1="clr-namespace:ViewModelLayer;assembly=ViewModelLayer"
+        mc:Ignorable="d"
+        Title="SignUpScreen" Height="420" Width="650" WindowStyle="None" Margin="0" ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        BorderBrush="LightGray" BorderThickness="3">
+    <Window.Resources>
+        <loc1:RegisterUser x:Key="myCmd"></loc1:RegisterUser>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/BackGrnd.jpg" Opacity=".65"></ImageBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<Image Source="/Images/VertBar.jpg" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Stretch="Fill"></Image>-->
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Background="Transparent">
+            <StackPanel VerticalAlignment="Center">
+                <Image Source="/Images/AppLogo.png" Height="55" Width="75"></Image>
+                <TextBlock FontSize="15" FontStyle="Italic" FontWeight="DemiBold" TextWrapping="Wrap"
+                   Foreground="MediumBlue" HorizontalAlignment="Center">Student Record Management</TextBlock>
+
+                <TextBlock FontSize="15" FontStyle="Italic" FontWeight="DemiBold" TextWrapping="Wrap"
+                   Foreground="MediumBlue" HorizontalAlignment="Center">Platform</TextBlock>
+                <!--<Label FontSize="12" FontStyle="Italic" FontWeight="Medium"
+                   Foreground="Black" HorizontalAlignment="Center">Login to manage student details</Label>-->
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="grdSignup" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35*"></ColumnDefinition>
+                <ColumnDefinition Width="39*"></ColumnDefinition>
+                <ColumnDefinition Width="319*"/>
+                <ColumnDefinition Width="36*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" BorderThickness="2" Background="White" BorderBrush="DarkGray" CornerRadius="20" Grid.ColumnSpan="3" Margin="35,0.333,0.333,19" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.8*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".01*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height=".01*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="1" Grid.Column="1" Height="30" FontSize="15">* Enter User ID</Label>
+                    <TextBox x:Name="usrId" Grid.Row="1" Grid.Column="2" Height="30" Width="180"
+                             Text="{Binding Path=UserId,Source={StaticResource myCmd}, Mode=TwoWay}" ToolTip="Enter your email id. *example@email.com"></TextBox>
+                    <Label Grid.Row="2" Grid.Column="1" Height="30" FontSize="15">* Enter Password</Label>
+                    <PasswordBox x:Name="pwd1" Grid.Row="2" Grid.Column="2" Height="30" Width="180"
+                                Background="{Binding Path=PasswordMatch,Source={StaticResource myCmd}}" MaxLength="12" ToolTip="Password length should be between 6 and 12. The password should contain atleast one special character and number."></PasswordBox>
+                    <Label Grid.Row="3" Grid.Column="1" Height="30" FontSize="15">* Confirm Password</Label>
+                    <PasswordBox x:Name="pwd2" Grid.Row="3" Grid.Column="2" Height="30" Width="180"
+                                 Background="{Binding Path=ConfirmPassword,Source={StaticResource myCmd}}" ToolTip="Retype your password"></PasswordBox>
+                    <Label Grid.Row="4" Grid.Column="1" Height="30" FontSize="15">* User Type</Label>
+                    <ComboBox x:Name="userType" Grid.Row="4" Grid.Column="2" Height="30" Width="180"
+                                 SelectedItem="{Binding Path=UserType,Source={StaticResource myCmd}}" ToolTip="Select user type"></ComboBox>
+                    <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="btnBck" Click="BtnBck_Click" Height="30" Width="42" ToolTip="Go back to login screen" Background="Transparent" BorderBrush="Transparent">
+                            <Image Source="/Images/BackBtn.png"></Image>
+                        </Button>
+                        <Button FontSize="15" Height="30" Width="80" x:Name="signup" Click="Signup_Click"
+                            Command="{Binding UserRegisterCommand,Source={StaticResource myCmd}}" 
+                            CommandParameter="{Binding ElementName=pwd1}" VerticalAlignment="Center">Register</Button>
+                    </StackPanel>
+                    <!--<Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontSize="15" Height="30" Width="80" x:Name="signup" Click="Signup_Click"
+                            Command="{Binding UserRegisterCommand,Source={StaticResource myCmd}}" 
+                            CommandParameter="{Binding ElementName=pwd1}" VerticalAlignment="Center">Register</Button>-->
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="grdLogin" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".1*"></ColumnDefinition>
+                <ColumnDefinition Width=".6*"></ColumnDefinition>
+                <ColumnDefinition Width=".1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height=".2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="1" Grid.Row="1" BorderThickness="2" BorderBrush="DarkGray" Background="White" CornerRadius="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                        <ColumnDefinition Width=".25*"></ColumnDefinition>
+                        <ColumnDefinition Width=".42*"></ColumnDefinition>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".3*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height=".3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="1" Grid.Column="1" Height="30" FontSize="15">* User ID</Label>
+                    <TextBox Grid.Row="1" Grid.Column="2" Height="25" Width="140" x:Name="logUsr"></TextBox>
+                    <Label Grid.Row="2" Grid.Column="1" Height="30" FontSize="15">* Password</Label>
+                    <PasswordBox Grid.Row="2" Grid.Column="2" Height="25" Width="140" x:Name="logPwd"></PasswordBox>
+                    <Button x:Name="btnLogin" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" FontSize="15" 
+                            Height="25" Width="80" Click="BtnLogin_Click">Login</Button>
+                    <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="15" Height="32" Width="120">
+                        <Hyperlink x:Name="crtAcntLink" Click="CrtAcntLink_Click">Create Account</Hyperlink>
+                    </Label>
+                </Grid>
+            </Border>
+        </Grid>
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+            <Border x:Name="minBrdr">
+                <Image x:Name="minImg" Source="/Images/minimize_box_blue1.png" Height="20" Width="20" MouseEnter="MinImg_MouseEnter"
+                   MouseLeave="MinImg_MouseLeave" MouseLeftButtonDown="MinImg_MouseLeftButtonDown"></Image>
+            </Border>
+            <Border x:Name="clsBrdr">
+                <Image x:Name="clsImg" Source="/Images/close_box_red1.png" Height="20" Width="20" MouseEnter="ClsImg_MouseEnter"
+                       MouseLeave="ClsImg_MouseLeave" MouseLeftButtonDown="ClsImg_MouseLeftButtonDown"></Image>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <TextBlock x:Name="errMsg1" Foreground="Red" Height="15" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"></TextBlock>
+            <TextBlock x:Name="errMsg2" Foreground="Red" Height="15" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"></TextBlock>
+            <TextBlock x:Name="errMsg3" Foreground="Red" Height="15" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"></TextBlock>
+            <TextBlock x:Name="errMsg4" Foreground="Red" Height="15" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
