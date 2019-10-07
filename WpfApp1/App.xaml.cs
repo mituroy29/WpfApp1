@@ -19,7 +19,7 @@ namespace WpfApp1
         private static Mutex _mutex = null;
         protected override void OnStartup(StartupEventArgs e)
         {
-            const string appName = "MyAppName";
+            const string appName = "SRMP APP";
             bool createdNew;
 
             _mutex = new Mutex(true, appName, out createdNew);
