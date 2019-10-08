@@ -98,39 +98,62 @@ namespace WpfApp1
                 studSub3.Text.Length != 0 || studSub4.Text.Length != 0 || studSub5.Text.Length != 0 || studSub6.Text.Length != 0 ||
                 studSub7.Text.Length != 0 || studExmName.Text.Length != 0 || studExmMnth.Text.Length != 0 || studAtndnce.Text.Length != 0)
             {
-                StudentResultDetails st = new StudentResultDetails();
+                System.Data.DataTable d = new System.Data.DataTable();
+                d = obj.SelectStudentMarksListByID(Convert.ToInt32(studID.Text));
+                bool bFlg = false;
 
-                obj.ID = Convert.ToInt32(studID.Text);
-                obj.Name = Convert.ToString(studName.Text);
-                obj.Subject1 = Convert.ToInt32(studSub1.Text);
-                obj.Subject2 = Convert.ToInt32(studSub2.Text);
-                obj.Subject3 = Convert.ToInt32(studSub3.Text);
-                obj.Subject4 = Convert.ToInt32(studSub4.Text);
-                obj.Subject5 = Convert.ToInt32(studSub5.Text);
-                obj.Subject6 = Convert.ToInt32(studSub6.Text);
-                obj.Subject7 = Convert.ToInt32(studSub7.Text);
-                obj.ExamName = Convert.ToString(studExmName.Text);
-                obj.ExamMonth = Convert.ToString(studExmMnth.Text);
-                obj.Attendance = Convert.ToInt32(studAtndnce.Text);
+                if (d.Rows.Count != 0)
+                {
+                    for (int i = 0; i < d.Rows.Count; i++)
+                    {
+                        if (Convert.ToInt32(d.Rows[i]["ID"]) == Convert.ToInt32(studID.Text)
+                            && Convert.ToString(d.Rows[i]["ExamName"]) == studExmName.Text)
+                        {
+                            bFlg = true;
+                            break;
+                        }
+                    }
+                }
+                if (!bFlg)
+                {
+                    StudentResultDetails st = new StudentResultDetails();
 
-                st = obj;
+                    obj.ID = Convert.ToInt32(studID.Text);
+                    obj.Name = Convert.ToString(studName.Text);
+                    obj.Subject1 = Convert.ToInt32(studSub1.Text);
+                    obj.Subject2 = Convert.ToInt32(studSub2.Text);
+                    obj.Subject3 = Convert.ToInt32(studSub3.Text);
+                    obj.Subject4 = Convert.ToInt32(studSub4.Text);
+                    obj.Subject5 = Convert.ToInt32(studSub5.Text);
+                    obj.Subject6 = Convert.ToInt32(studSub6.Text);
+                    obj.Subject7 = Convert.ToInt32(studSub7.Text);
+                    obj.ExamName = Convert.ToString(studExmName.Text);
+                    obj.ExamMonth = Convert.ToString(studExmMnth.Text);
+                    obj.Attendance = Convert.ToInt32(studAtndnce.Text);
 
-                lst.Add(st);
-                this.grdStudentMark.ItemsSource = lst;
+                    st = obj;
 
-                obj.AddStudentMarks(st);
-                studID.Clear();
-                studName.Clear();
-                studSub1.Clear();
-                studSub2.Clear();
-                studSub3.Clear();
-                studSub4.Clear();
-                studSub5.Clear();
-                studSub6.Clear();
-                studSub7.Clear();
-                studExmName.Clear();
-                studExmMnth.Clear();
-                studAtndnce.Clear();
+                    lst.Add(st);
+                    this.grdStudentMark.ItemsSource = lst;
+
+                    obj.AddStudentMarks(st);
+                    studID.Clear();
+                    studName.Clear();
+                    studSub1.Clear();
+                    studSub2.Clear();
+                    studSub3.Clear();
+                    studSub4.Clear();
+                    studSub5.Clear();
+                    studSub6.Clear();
+                    studSub7.Clear();
+                    studExmName.Clear();
+                    studExmMnth.Clear();
+                    studAtndnce.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Student mark for this test already exists", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -140,7 +163,7 @@ namespace WpfApp1
                 studSub3.Text.Length == 0 || studSub4.Text.Length == 0 || studSub5.Text.Length == 0 || studSub6.Text.Length == 0 ||
                 studSub7.Text.Length == 0 || studExmName.Text.Length == 0 || studExmMnth.Text.Length == 0 || studAtndnce.Text.Length == 0)
             {
-                MessageBox.Show("Please enter all mandatory fields.", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a record.", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (studID.Text.Length != 0 || studName.Text.Length != 0 || studSub1.Text.Length != 0 || studSub2.Text.Length != 0 ||
                 studSub3.Text.Length != 0 || studSub4.Text.Length != 0 || studSub5.Text.Length != 0 || studSub6.Text.Length != 0 ||
@@ -172,7 +195,7 @@ namespace WpfApp1
                 studSub3.Text.Length == 0 || studSub4.Text.Length == 0 || studSub5.Text.Length == 0 || studSub6.Text.Length == 0 ||
                 studSub7.Text.Length == 0 || studExmName.Text.Length == 0 || studExmMnth.Text.Length == 0 || studAtndnce.Text.Length == 0)
             {
-                MessageBox.Show("Please enter all mandatory fields.", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a record.", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (studID.Text.Length != 0 || studName.Text.Length != 0 || studSub1.Text.Length != 0 || studSub2.Text.Length != 0 ||
                 studSub3.Text.Length != 0 || studSub4.Text.Length != 0 || studSub5.Text.Length != 0 || studSub6.Text.Length != 0 ||
