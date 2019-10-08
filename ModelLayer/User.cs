@@ -192,6 +192,49 @@ namespace ModelLayer
             }
             return false;
         }
+        public bool SelectUserbyID(string UserId)
+        {
+            SetConnection();
+            string pwd = string.Empty;
+            SqlDataAdapter adptr = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            if (con.State != ConnectionState.Open)
+            {
+                con.Open();
+            }
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SelectUser", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserID", UserId);
+                //SqlDataReader rdr = cmd.ExecuteReader();
+                //while(rdr.Read())
+                //{
+                //    pwd = (string)rdr["Password"];
+                //}
+                cmd.ExecuteNonQuery();
+                adptr.SelectCommand = cmd;
+                adptr.Fill(ds);
+                dt = ds.Tables[0];
+                CloseConnection(con);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            if (dt != null)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (dt.Rows[i]["UserID"].ToString() == UserId)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         public string SelectUserType(string UserId)
         {
             SetConnection();

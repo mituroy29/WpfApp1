@@ -51,6 +51,7 @@ namespace WpfApp1
             errMsg2.Text = string.Empty;
             errMsg3.Text = string.Empty;
             errMsg4.Text = string.Empty;
+            bool bUsr = user.AuthenticateUserbyID(usrId.Text);
 
             if (usrId.Text.Length == 0)
             {
@@ -66,6 +67,10 @@ namespace WpfApp1
                 errMsg1.Visibility = Visibility.Visible;
                 errMsg1.Text = "Enter valid email id. *example@email.com";
                 usrId.Clear();
+            }
+            if (bUsr)
+            {
+                MessageBox.Show("User already exists.", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (pwd1.Password.Length == 0)
             {
@@ -114,7 +119,7 @@ namespace WpfApp1
                 errMsg4.Visibility = Visibility.Visible;
                 errMsg4.Text = "User Type is a mandatory field!";
             }
-            if (isValidUsrId && isValidPwd && isPwdMatched && isValidUsrType)
+            if (isValidUsrId && isValidPwd && isPwdMatched && isValidUsrType && !bUsr)
             {
                 if (MessageBox.Show("Account has been registered! \n You can login now.", "Information", MessageBoxButton.OK) == MessageBoxResult.OK)
                 {
@@ -195,7 +200,7 @@ namespace WpfApp1
                 logPwd.BorderBrush = Brushes.Red;
                 errMsg2.Text = "Password is required for login";
             }
-            if (logUsr.Text != null&& logPwd.Password != null)
+            if (logUsr.Text != null && logPwd.Password != null)
             {
                 if (user.AuthenticateUser(logUsr.Text, logPwd.Password))
                 {

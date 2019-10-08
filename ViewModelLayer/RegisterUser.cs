@@ -40,6 +40,10 @@ namespace ViewModelLayer
         {
             return obj.SelectUser(UserId, Password);
         }
+        public bool AuthenticateUserbyID(string UserId)
+        {
+            return obj.SelectUserbyID(UserId);
+        }
         public string SelectUserType(string UserId)
         {
             return obj.SelectUserType(UserId);

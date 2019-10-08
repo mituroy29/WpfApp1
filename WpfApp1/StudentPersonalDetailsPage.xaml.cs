@@ -64,27 +64,37 @@ namespace WpfApp1
             if (studID.Text.Length != 0 && studName.Text.Length != 0 && studDep.Text.Length != 0
                 && studAddrss.Text.Length != 0 && studCntctNmbr.Text.Length != 0)
             {
-                AddStudent st = new AddStudent();
+                System.Data.DataTable d = new System.Data.DataTable();
+                d = obj.SearchStudentByID(Convert.ToInt32(studID.Text));
 
-                obj.ID = Convert.ToInt32(studID.Text);
-                obj.Name = studName.Text.ToString();
-                obj.Department = studDep.Text.ToString();
-                obj.IsActive = studIsActv.IsChecked.Value;
-                obj.Address = studAddrss.Text.ToString();
-                obj.ContactNumber = studCntctNmbr.Text.ToString();
+                if (d.Rows.Count != 0 && Convert.ToInt32(d.Rows[0]["ID"]) != Convert.ToInt32(studID.Text))
+                {
+                    AddStudent st = new AddStudent();
 
-                st = obj;
+                    obj.ID = Convert.ToInt32(studID.Text);
+                    obj.Name = studName.Text.ToString();
+                    obj.Department = studDep.Text.ToString();
+                    obj.IsActive = studIsActv.IsChecked.Value;
+                    obj.Address = studAddrss.Text.ToString();
+                    obj.ContactNumber = studCntctNmbr.Text.ToString();
 
-                lst.Add(st);
-                this.grdStudent.ItemsSource = lst;
+                    st = obj;
 
-                obj.AddNewStudent(st);
-                studID.Clear();
-                studName.Clear();
-                studDep.Clear();
-                studIsActv.IsChecked = false;
-                studAddrss.Clear();
-                studCntctNmbr.Clear();
+                    lst.Add(st);
+                    this.grdStudent.ItemsSource = lst;
+
+                    obj.AddNewStudent(st);
+                    studID.Clear();
+                    studName.Clear();
+                    studDep.Clear();
+                    studIsActv.IsChecked = false;
+                    studAddrss.Clear();
+                    studCntctNmbr.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Student already exists", "Validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
         private void GrdStudent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
