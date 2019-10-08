@@ -155,7 +155,7 @@ namespace WpfApp1
                         DataSet ds = new DataSet();
                         ds.Tables.Add(dtCpy1);
                         ds.Tables.Add(dtCpy2);
-                        string strPath = @"C:\New folder\Student_Details.xlsx";
+                        string strPath = @"C:\Exports\Excel_Student_Details.xlsx";
 
                         Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
 

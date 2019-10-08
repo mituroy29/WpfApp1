@@ -217,7 +217,7 @@ namespace WpfApp1
             ds.Tables.Add(dtCpy1);
 
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-            string strPath = @"C:\New Folder\Semester_Details.xlsx";
+            string strPath = @"C:\Exports\Excel_Semester_Details.xlsx";
 
             Microsoft.Office.Interop.Excel.Workbook excelWorkBook = excelApp.Workbooks.Open(strPath);
 

@@ -179,7 +179,7 @@ namespace WpfApp1
             //dlg.ShowDialog();            
 
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-            string strPth = @"C:\New Folder\Excel_Student_Personal_Details.xlsx";
+            string strPth = @"C:\Exports\Excel_Student_Personal_Details.xlsx";
 
             Microsoft.Office.Interop.Excel.Workbook excelWorkBook = excelApp.Workbooks.Open(strPth);
 
