@@ -179,15 +179,15 @@ namespace WpfApp1
             //dlg.ShowDialog();            
 
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-            string strPth = @"C:\Exports\Excel_Student_Personal_Details.xlsx";
+            string strPth = @"C:\Exports\All_Student_Personal_Details.xlsx";
 
             Microsoft.Office.Interop.Excel.Workbook excelWorkBook = excelApp.Workbooks.Open(strPth);
 
             foreach (System.Data.DataTable table in ds.Tables)
             {
-                if (excelWorkBook.Sheets.Count != 0)
+                if (excelWorkBook.Sheets.Count == 1)
                 {
-                    Worksheet sht = (Worksheet)excelWorkBook.Worksheets[table.TableName];
+                    Worksheet sht = (Worksheet)excelWorkBook.Worksheets[1];
                     sht.Name = "RemoveSheet";
                 }
                 Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = excelWorkBook.Sheets.Add();
@@ -206,7 +206,10 @@ namespace WpfApp1
                     }
                 }
             }
-            excelWorkBook.Worksheets[2].Delete();
+            Worksheet sht1 = (Worksheet)excelWorkBook.Worksheets[2];
+            excelApp.DisplayAlerts = false;
+            sht1.Delete();
+            excelApp.DisplayAlerts = true;
             excelWorkBook.Save();
             excelWorkBook.Close();
             excelApp.Quit();

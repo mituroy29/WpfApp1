@@ -51,7 +51,10 @@ namespace WpfApp1
 
         private void SelectStud_Click(object sender, RoutedEventArgs e)
         {
-            //DataTable dt = new DataTable();
+            if (cmbSearch.SelectedItem == null && txtSearch.Text.Length == 0)
+            {
+                MessageBox.Show("Please select a student.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             if (cmbSearch.SelectedItem != null)
             {
                 if (cmbSearch.SelectedItem.ToString() == "ID")
@@ -160,14 +163,16 @@ namespace WpfApp1
                         Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
 
                         Microsoft.Office.Interop.Excel.Workbook excelWorkBook = excelApp.Workbooks.Open(strPath);
-
                         foreach (System.Data.DataTable table in ds.Tables)
                         {
                             if (excelWorkBook.Sheets.Count != 0)
                             {
                                 Worksheet sht = (Worksheet)excelWorkBook.Worksheets[table.TableName];
-                                sht.Name = "RSheet" + table.TableName;
+                                sht.Name = "Sheet" + table.TableName;
                             }
+                        }
+                        foreach (System.Data.DataTable table in ds.Tables)
+                        {
                             Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = excelWorkBook.Sheets.Add();
                             excelWorkSheet.Name = table.TableName;
 
@@ -184,8 +189,10 @@ namespace WpfApp1
                                 }
                             }
                         }
-                        excelWorkBook.Worksheets[3].Delete();
+                        excelApp.DisplayAlerts = false;
                         excelWorkBook.Worksheets[4].Delete();
+                        excelWorkBook.Worksheets[3].Delete();
+                        excelApp.DisplayAlerts = true;
                         excelWorkBook.Worksheets[2].Move(excelWorkBook.Worksheets[1]);
                         excelWorkBook.Save();
                         excelWorkBook.Close();
@@ -279,13 +286,15 @@ namespace WpfApp1
 
         private void MyTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "Class Test1")
+            if (dt1.Rows.Count != 0)
             {
-                stckCol.Visibility = Visibility.Visible;
-                stckPie.Visibility = Visibility.Hidden;
-                myBar.Title = "Class Test 1";
-                myChrtBar.DataContext = new KeyValuePair<string, int>[]
-                 {
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "Class Test1")
+                {
+                    stckCol.Visibility = Visibility.Visible;
+                    stckPie.Visibility = Visibility.Hidden;
+                    myBar.Title = "Class Test 1";
+                    myChrtBar.DataContext = new KeyValuePair<string, int>[]
+                     {
                      new KeyValuePair<string, int>("Sub1",Convert.ToInt32(dt1.Rows[0]["Subject1"])),
                      new KeyValuePair<string, int>("Sub2",Convert.ToInt32(dt1.Rows[0]["Subject2"])),
                      new KeyValuePair<string, int>("Sub3",Convert.ToInt32(dt1.Rows[0]["Subject3"])),
@@ -293,15 +302,15 @@ namespace WpfApp1
                      new KeyValuePair<string, int>("Sub5",Convert.ToInt32(dt1.Rows[0]["Subject5"])),
                      new KeyValuePair<string, int>("Sub6",Convert.ToInt32(dt1.Rows[0]["Subject6"])),
                      new KeyValuePair<string, int>("Sub7",Convert.ToInt32(dt1.Rows[0]["Subject7"]))
-                 };
-            }
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "Class Test2")
-            {
-                stckPie.Visibility = Visibility.Hidden;
-                stckCol.Visibility = Visibility.Visible;
-                myBar.Title = "Class Test 2";
-                myChrtBar.DataContext = new KeyValuePair<string, int>[]
-                 {
+                     };
+                }
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "Class Test2")
+                {
+                    stckPie.Visibility = Visibility.Hidden;
+                    stckCol.Visibility = Visibility.Visible;
+                    myBar.Title = "Class Test 2";
+                    myChrtBar.DataContext = new KeyValuePair<string, int>[]
+                     {
                      new KeyValuePair<string, int>("Sub1",Convert.ToInt32(dt1.Rows[1]["Subject1"])),
                      new KeyValuePair<string, int>("Sub2",Convert.ToInt32(dt1.Rows[1]["Subject2"])),
                      new KeyValuePair<string, int>("Sub3",Convert.ToInt32(dt1.Rows[1]["Subject3"])),
@@ -309,15 +318,15 @@ namespace WpfApp1
                      new KeyValuePair<string, int>("Sub5",Convert.ToInt32(dt1.Rows[1]["Subject5"])),
                      new KeyValuePair<string, int>("Sub6",Convert.ToInt32(dt1.Rows[1]["Subject6"])),
                      new KeyValuePair<string, int>("Sub7",Convert.ToInt32(dt1.Rows[1]["Subject7"]))
-                 };
-            }
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "Class Test3")
-            {
-                stckCol.Visibility = Visibility.Visible;
-                stckPie.Visibility = Visibility.Hidden;
-                myBar.Title = "Class Test 3";
-                myChrtBar.DataContext = new KeyValuePair<string, int>[]
-                 {
+                     };
+                }
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "Class Test3")
+                {
+                    stckCol.Visibility = Visibility.Visible;
+                    stckPie.Visibility = Visibility.Hidden;
+                    myBar.Title = "Class Test 3";
+                    myChrtBar.DataContext = new KeyValuePair<string, int>[]
+                     {
                      new KeyValuePair<string, int>("Sub1",Convert.ToInt32(dt1.Rows[2]["Subject1"])),
                      new KeyValuePair<string, int>("Sub2",Convert.ToInt32(dt1.Rows[2]["Subject2"])),
                      new KeyValuePair<string, int>("Sub3",Convert.ToInt32(dt1.Rows[2]["Subject3"])),
@@ -325,74 +334,76 @@ namespace WpfApp1
                      new KeyValuePair<string, int>("Sub5",Convert.ToInt32(dt1.Rows[2]["Subject5"])),
                      new KeyValuePair<string, int>("Sub6",Convert.ToInt32(dt1.Rows[2]["Subject6"])),
                      new KeyValuePair<string, int>("Sub7",Convert.ToInt32(dt1.Rows[2]["Subject7"]))
-                 };
-            }
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "July")
-            {
-                myChrtPie1.DataContext = new KeyValuePair<string, int>[]
+                     };
+                }
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "July")
                 {
+                    myChrtPie1.DataContext = new KeyValuePair<string, int>[]
+                    {
                     new KeyValuePair<string,int>("Present",Convert.ToInt32(dt1.Rows[0]["Attendance"])),
                     new KeyValuePair<string,int>("Absent",(20-Convert.ToInt32(dt1.Rows[0]["Attendance"])))
-                };
-                stckPie.Visibility = Visibility.Visible;
-                stckCol.Visibility = Visibility.Hidden;
-                //Collection<ResourceDictionary> palette1 = new Collection<ResourceDictionary>();
-                //for (int i = 0; i < 2; i++)
-                //{
-                //    ResourceDictionary rd = new ResourceDictionary();
-                //    System.Windows.Style style = new System.Windows.Style(typeof(Control));
-                //    SolidColorBrush brush = null;
-                //    //switch (dt1.Rows[0]["ExamMonth"])
-                //    //{
-                //    //    case "Present": brush = new SolidColorBrush(Colors.Green); break;
-                //    //    case "Absent": brush = new SolidColorBrush(Colors.Red); break;
-                //    //}
-                //    if (i == 0)
-                //    {
-                //        brush = new SolidColorBrush(Colors.Green);
-                //    }
-                //    if (i == 1)
-                //    {
-                //        brush = new SolidColorBrush(Colors.Red);
-                //    }
-                //    style.Setters.Add(new Setter() { Property = Control.BackgroundProperty, Value = brush });
-                //    rd.Add("DataPointStyle", style);
-                //    palette1.Add(rd);
-                //}
-                //myChrtPie1.Palette = palette1;
-            }
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "August")
-            {
-                myChrtPie1.DataContext = new KeyValuePair<string, int>[]
+                    };
+                    stckPie.Visibility = Visibility.Visible;
+                    stckCol.Visibility = Visibility.Hidden;
+                    //Collection<ResourceDictionary> palette1 = new Collection<ResourceDictionary>();
+                    //for (int i = 0; i < 2; i++)
+                    //{
+                    //    ResourceDictionary rd = new ResourceDictionary();
+                    //    System.Windows.Style style = new System.Windows.Style(typeof(Control));
+                    //    SolidColorBrush brush = null;
+                    //    //switch (dt1.Rows[0]["ExamMonth"])
+                    //    //{
+                    //    //    case "Present": brush = new SolidColorBrush(Colors.Green); break;
+                    //    //    case "Absent": brush = new SolidColorBrush(Colors.Red); break;
+                    //    //}
+                    //    if (i == 0)
+                    //    {
+                    //        brush = new SolidColorBrush(Colors.Green);
+                    //    }
+                    //    if (i == 1)
+                    //    {
+                    //        brush = new SolidColorBrush(Colors.Red);
+                    //    }
+                    //    style.Setters.Add(new Setter() { Property = Control.BackgroundProperty, Value = brush });
+                    //    rd.Add("DataPointStyle", style);
+                    //    palette1.Add(rd);
+                    //}
+                    //myChrtPie1.Palette = palette1;
+                }
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "August")
                 {
+                    myChrtPie1.DataContext = new KeyValuePair<string, int>[]
+                    {
                     new KeyValuePair<string,int>("Present",Convert.ToInt32(dt1.Rows[1]["Attendance"])),
                     new KeyValuePair<string,int>("Absent",(20-Convert.ToInt32(dt1.Rows[1]["Attendance"])))
-                };
-                stckPie.Visibility = Visibility.Visible;
-                stckCol.Visibility = Visibility.Hidden;
-            }
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "September")
-            {
-                myChrtPie1.DataContext = new KeyValuePair<string, int>[]
+                    };
+                    stckPie.Visibility = Visibility.Visible;
+                    stckCol.Visibility = Visibility.Hidden;
+                }
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "September")
                 {
+                    myChrtPie1.DataContext = new KeyValuePair<string, int>[]
+                    {
                     new KeyValuePair<string,int>("Present",Convert.ToInt32(dt1.Rows[2]["Attendance"])),
                     new KeyValuePair<string,int>("Absent",(20-Convert.ToInt32(dt1.Rows[2]["Attendance"])))
-                };
-                stckPie.Visibility = Visibility.Visible;
-                stckCol.Visibility = Visibility.Hidden;
-            }
-            if (((TreeViewItem)e.NewValue).Header.ToString() == "Percentage")
-            {
-                stckPie.Visibility = Visibility.Hidden;
-                stckCol.Visibility = Visibility.Visible;
+                    };
+                    stckPie.Visibility = Visibility.Visible;
+                    stckCol.Visibility = Visibility.Hidden;
+                }
+                if (((TreeViewItem)e.NewValue).Header.ToString() == "Percentage")
+                {
+                    stckPie.Visibility = Visibility.Hidden;
+                    stckCol.Visibility = Visibility.Visible;
 
-                myChrtBar.DataContext = new KeyValuePair<string, int>[]
-                 {
+                    myChrtBar.DataContext = new KeyValuePair<string, int>[]
+                     {
                      lst[0],
                      lst[1],
                      lst[2]
-                 };
+                     };
+                }
             }
         }
     }
 }
+

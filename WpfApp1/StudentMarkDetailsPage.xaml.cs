@@ -224,7 +224,7 @@ namespace WpfApp1
 
             foreach (System.Data.DataTable table in ds.Tables)
             {
-                if (excelWorkBook.Sheets.Count != 0)
+                if (excelWorkBook.Sheets.Count == 1)
                 {
                     Worksheet sht = (Worksheet)excelWorkBook.Worksheets[table.TableName];
                     sht.Name = "RemoveSheet";
@@ -246,7 +246,9 @@ namespace WpfApp1
                     }
                 }
             }
-            excelWorkBook.Worksheets[2].Delete();
+            Worksheet sht1 = (Worksheet)excelWorkBook.Worksheets[2];
+            excelApp.DisplayAlerts = false;
+            sht1.Delete();
             excelWorkBook.Save();
             excelWorkBook.Close();
             excelApp.Quit();
